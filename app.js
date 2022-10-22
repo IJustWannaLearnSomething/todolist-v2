@@ -66,7 +66,7 @@ app.get("/:newList", (req, res) => {
   const customListName = _.capitalize(req.params.newList);
   List.findOne({ name: customListName }, (err, result) => {
     if (!err) {
-      if (result) {
+      if (!result) {
         const list = new List({
           name: customListName,
           items: defaultItems,
