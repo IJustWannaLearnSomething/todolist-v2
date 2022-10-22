@@ -46,7 +46,7 @@ app.get("/favicon.ico", (req, res) => res.status(204));
 app.get("/", function (req, res) {
   ListItem.find((err, results) => {
     if (!err) {
-      if (results.length === 0 || !results) {
+      if (!results) {
         ListItem.insertMany(defaultItems, (err) => {
           if (!err) {
             console.log(
@@ -66,7 +66,7 @@ app.get("/:newList", (req, res) => {
   const customListName = _.capitalize(req.params.newList);
   List.findOne({ name: customListName }, (err, result) => {
     if (!err) {
-      if (result.items === 0 || !result) {
+      if (result) {
         const list = new List({
           name: customListName,
           items: defaultItems,
